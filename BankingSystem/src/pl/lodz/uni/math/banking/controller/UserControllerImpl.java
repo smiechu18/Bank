@@ -12,7 +12,7 @@ public class UserControllerImpl implements UserController {
 	private BinProvider binProvider;
 	public UserControllerImpl() {
 		binProvider = new BinProvider();
-		userDao = binProvider.getUserDaoImpl();
+		userDao = binProvider.getUserDao();
 	}
 
 	public boolean createUser(User user) {

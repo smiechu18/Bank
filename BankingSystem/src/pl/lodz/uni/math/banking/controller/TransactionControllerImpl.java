@@ -15,7 +15,7 @@ public class TransactionControllerImpl implements TransactionController {
 	private BinProvider binProvider;
 	public TransactionControllerImpl() {
 		binProvider = new BinProvider();
-		transactionDao = binProvider.getTransactionDaoImpl();
+		transactionDao = binProvider.getTransactionDao();
 	}
 
 	public boolean createDeposit(Deposit deposit) {
