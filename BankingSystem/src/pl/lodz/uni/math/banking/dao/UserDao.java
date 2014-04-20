@@ -1,6 +1,6 @@
 package pl.lodz.uni.math.banking.dao;
 
-import java.util.List;
+import java.util.Set;
 
 import pl.lodz.uni.math.banking.pojo.Account;
 import pl.lodz.uni.math.banking.pojo.User;
@@ -8,13 +8,13 @@ import pl.lodz.uni.math.banking.pojo.User;
 public interface UserDao {
 	boolean createUser(User user);
 
-	List<User> getAllUsers();
+	Set<User> getAllUsers();
 
-	void deleteUser(User user);
+	boolean deleteUser(User user);
 
 	boolean createAccount(User user, Account account);
 
-	void deleteAccount(User user, Account account);
+	boolean deleteAccount(User user, Account account);
 
 	User getUserById(String id);
 

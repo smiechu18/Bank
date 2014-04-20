@@ -4,7 +4,6 @@ import java.util.List;
 
 import pl.lodz.uni.math.banking.dao.TransactionDao;
 import pl.lodz.uni.math.banking.engine.BinProvider;
-import pl.lodz.uni.math.banking.pojo.Account;
 import pl.lodz.uni.math.banking.pojo.Deposit;
 import pl.lodz.uni.math.banking.pojo.DomesticTransfer;
 import pl.lodz.uni.math.banking.pojo.ForeignTransfer;
@@ -17,38 +16,28 @@ public class TransactionControllerImpl implements TransactionController {
 		binProvider = new BinProvider();
 		transactionDao = binProvider.getTransactionDao();
 	}
-
 	public boolean createDeposit(Deposit deposit) {
-		return transactionDao.createTransaction(deposit);
+		return transactionDao.createDeposit(deposit);
 	}
 
 	public boolean createForeignTransfer(ForeignTransfer foreignTransfer) {
-		return transactionDao.createTransaction(foreignTransfer);
+		return transactionDao.createForeignTransfer(foreignTransfer);
 	}
 
 	public boolean createDomesticTransfer(DomesticTransfer domesticTransfer) {
-		return transactionDao.createTransaction(domesticTransfer);
+		return transactionDao.createDomesticTransfe(domesticTransfer);
 	}
 
-	public List<Transaction> getAllTransaction() {
-		return transactionDao.getAllTransaction();
-	}
-
-	@Override
 	public void confirmTransaction(Transaction transaction) {
 		 transactionDao.confirmTransaction(transaction);
 	}
 
-	@Override
 	public void cancelTransaction(Transaction transaction) {
 		 transactionDao.cancelTransaction(transaction);
 		
 	}
-
-	@Override
-	public List<Transaction> getTransfersToTheAccount(Account account) {
-		return transactionDao.getTransfersToTheAccount(account);
+	
+	public List<Transaction> getConfirmedTransactionList() {
+		return transactionDao.getConfirmedTransactionList();
 	}
-
-
 }

@@ -1,20 +1,23 @@
 package pl.lodz.uni.math.banking.pojo;
 
-public class ForeignTransfer extends Transfer {
-	public ForeignTransfer(Account receiverAccount, Account senderAccount, String title,
-			String number, double amount, String name, String surname,
-			String address, int swift) {
-		this.setTransactionStatus(EnumtransactionStatus.accepted);
+public class ForeignTransfer extends Transaction implements Itransfer{
+	public ForeignTransfer(Account receiverAccount, Account senderAccount,
+			String title, double amount) {
+		this.setTransactionStatus(EnumTransactionStatus.Accepted);
 		this.setReceiverAccount(receiverAccount);
-		
+		this.setSenderAccount(senderAccount);
 		this.title = title;
-		this.transactionNumber = FOREIGN_TRANSFER_NUMBER_BASE + number;
-		this.amount = amount;
-		this.receiverName = name;
-		this.receiverSurname = surname;
-		this.receiverAddress = address;
-		this.swift = swift;
+		this.transactionNumber = FOREIGN_TRANSFER_NUMBER_BASE
+				+ transactionCounter;
+		this.setAmount(amount);
+		transactionCounter++;
 	}
-	private int swift;
+	public Account getSenderAccount() {
+		return senderAccount;
+	}
+	public void setSenderAccount(Account senderAccount) {
+		this.senderAccount = senderAccount;
+	}
+	private Account senderAccount;
 	private final String FOREIGN_TRANSFER_NUMBER_BASE = "1";
 }

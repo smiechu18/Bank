@@ -8,14 +8,14 @@ public class Account {
 	private double balance;
 	private String swift;
 
-	public Account(String creatingDate, String number, String closingDate,
-			String country, double balance) {
-		this.balance = balance;
+	public Account(String creatingDate, String closingDate, String country,
+			double balance) {
+		this.setBalance(balance);
 		this.closingDate = closingDate;
 		this.country = country;
 		this.creatingDate = creatingDate;
 		this.setNumber(number);
-		this.swift = "";
+		this.setSwift("");
 	}
 
 	public String getNumber() {
@@ -24,6 +24,22 @@ public class Account {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+
+	public String getSwift() {
+		return swift;
+	}
+
+	public void setSwift(String swift) {
+		this.swift = swift;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 
 }

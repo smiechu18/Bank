@@ -1,6 +1,6 @@
 package pl.lodz.uni.math.banking.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import pl.lodz.uni.math.banking.dao.UserDao;
 import pl.lodz.uni.math.banking.engine.BinProvider;
@@ -15,28 +15,34 @@ public class UserControllerImpl implements UserController {
 		userDao = binProvider.getUserDao();
 	}
 
-	public boolean createUser(User user) {
-		return userDao.createUser(user);
+	public void createUser(User user) {
+		 userDao.createUser(user);
 	}
 
 	public void deleteUser(User user) {
-		userDao.deleteUser(user);
+		if(!userDao.deleteUser(user)){
+			System.out.println("User not found");
+		}
 	}
 
-	public List<User> getAllUsers() {
+	public Set<User> getAllUsers() {
 		return userDao.getAllUsers();
 	}
 
 	public void deleteAccount(User user,Account account) {
-		userDao.deleteAccount(user,account);
+		if(!userDao.deleteAccount(user,account)){
+			System.out.println("Account not found");
+		}
 	}
 	
-	public boolean createAccount(User user, Account account) {
-		return userDao.createAccount(user, account);
+	public void createAccount(User user, Account account) {
+		if(!userDao.createAccount(user, account)){
+			System.out.println("User not found");
+		}
 	}
 
-	public User getUserById(String Id) {
-		return userDao.getUserById(Id);
+	public User getUserById(String id) {
+		return userDao.getUserById(id);
 	}
 
 	public Account getAccountByNumber(String string) {

@@ -7,14 +7,14 @@ public class User {
 	private String name;
 	private String surname;
 	private String address;
-	private String ssn; // numer pesel
+	private String ssn; 
 	private String idNumber;
-	private String mainAccountNumber;
 	private List<Account> accountsList;
 
-	public User(String name, String idNumber) {
+	public User(String name, String idNumber, String ssn) {
 		this.setName(name);
 		this.setIdNumber(idNumber);
+		this.setSsn(ssn);
 		setAccountsList(new ArrayList<Account>());
 	}
 
@@ -56,6 +56,14 @@ public class User {
 
 	public void setAccountsList(List<Account> accountsList) {
 		this.accountsList = accountsList;
+	}
+
+	public String getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
 	}
 
 }

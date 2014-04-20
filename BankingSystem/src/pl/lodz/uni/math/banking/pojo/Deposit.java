@@ -1,15 +1,14 @@
 package pl.lodz.uni.math.banking.pojo;
-
 public class Deposit extends Transaction {
-	public Deposit(Account receiverAccount, String title, String number,
-			double amount) {
-		this.setTransactionStatus(EnumtransactionStatus.accepted);
+	public Deposit(Account receiverAccount, String title, double amount) {
+		this.setTransactionStatus(EnumTransactionStatus.Accepted);
 		this.setReceiverAccount(receiverAccount);
 		this.title = title;
-		this.transactionNumber = DEPOSITNUMBERBASE + number;
-		this.amount = amount;
-
+		this.transactionNumber = DEPOSIT_NUMBER_BASE + transactionCounter;
+		this.setAmount(amount);
+		transactionCounter++;
 	}
 
-	private final String DEPOSITNUMBERBASE = "10001";
+	private final String DEPOSIT_NUMBER_BASE = "10001";
 }
+

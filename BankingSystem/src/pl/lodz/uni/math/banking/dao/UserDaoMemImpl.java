@@ -1,45 +1,53 @@
 package pl.lodz.uni.math.banking.dao;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import pl.lodz.uni.math.banking.pojo.Account;
 import pl.lodz.uni.math.banking.pojo.User;
 
 public class UserDaoMemImpl implements UserDao {
-	private List<User> users;
+	private Set<User> users;
 
 	public UserDaoMemImpl() {
-		users = new ArrayList<User>();
+		users = new HashSet<>();
 	}
 
 	public boolean createUser(User user) {
-		return users.add(user);
+		boolean tmp = false;
+		for (User u : users) {
+			if (u.getSsn().equals(user.getSsn())  	||	 u.getIdNumber().equals(user.getIdNumber())) {
+				tmp = true;
+			} else {
+				tmp = false;
+			}
+		}
+		if(!tmp){
+			return users.add(user);
+		}
+		return false;
 	}
 
-	public List<User> getAllUsers() {
+	public Set<User> getAllUsers() {
 		return users;
 	}
 
-	public void deleteUser(User user) {
-		users.remove(user);
+	public boolean deleteUser(User user) {
+		return users.remove(user);
 	}
 
-	@Override
 	public boolean createAccount(User user, Account account) {
 		return user.getAccountsList().add(account);
 	}
 
-	@Override
-	public void deleteAccount(User user, Account account) {
-		user.getAccountsList().remove(account);
-		
+	public boolean deleteAccount(User user, Account account) {
+		return user.getAccountsList().remove(account);
 	}
 
 	public User getUserById(String id) {
 		User tmp = null;
-		for(User u : users){
-			if(u.getIdNumber().equals(id)){
+		for (User u : users) {
+			if (u.getIdNumber().equals(id)) {
 				tmp = u;
 			}
 		}
@@ -48,15 +56,13 @@ public class UserDaoMemImpl implements UserDao {
 
 	public Account getAccountByNumber(String string) {
 		Account tmp = null;
-		for (User u : users){
-			for (Account a : u.getAccountsList()){
-				if(a.getNumber().equals(string)){
+		for (User u : users) {
+			for (Account a : u.getAccountsList()) {
+				if (a.getNumber().equals(string)) {
 					tmp = a;
 				}
 			}
 		}
 		return tmp;
-	}
-
-	
+	}	
 }

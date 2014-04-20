@@ -2,19 +2,22 @@ package pl.lodz.uni.math.banking.pojo;
 
 public class Transaction {
 	
-	private EnumtransactionStatus transactionStatus;
+	private EnumTransactionStatus transactionStatus;
 	private Account receiverAccount;
 	protected String title;
 	protected String transactionNumber;
-	protected double amount;
+	private double amount;
 	protected double balanceAfterTransaction;
 	protected String transactionDate;
-	protected static int transactionId = 0;
+	protected String receiverName;
+	protected String receiverSurname;
+	protected String receiverAddress;
+	protected static int transactionCounter = 0;
 	
-	public EnumtransactionStatus getTransactionStatus() {
+	public EnumTransactionStatus getTransactionStatus() {
 		return transactionStatus;
 	}
-	public void setTransactionStatus(EnumtransactionStatus transactionStatus) {
+	public void setTransactionStatus(EnumTransactionStatus transactionStatus) {
 		 this.transactionStatus = transactionStatus;
 	}
 	public Account getReceiverAccount() {
@@ -23,4 +26,11 @@ public class Transaction {
 	public void setReceiverAccount(Account receiverAccount) {
 		this.receiverAccount = receiverAccount;
 	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	
 }

@@ -6,44 +6,68 @@ import java.util.List;
 import pl.lodz.uni.math.banking.pojo.*;
 
 public class TransactionDaoMemImpl implements TransactionDao {
-	private ArrayList<Transaction> transactions;
+	private ArrayList<Transaction> waitingTransactions;
+	private ArrayList<Transaction> canceledTransactions;
+	private ArrayList<Transaction> confirmedTransactions;
 
 	public TransactionDaoMemImpl() {
-		transactions = new ArrayList<Transaction>();
-	}
-
-	public boolean createTransaction(Transaction transaction) {
-		return transactions.add(transaction);
-	}
-
-	public List<Transaction> getAllTransaction() {
-		return transactions;
+		waitingTransactions = new ArrayList<Transaction>();
 	}
 
 	public void cancelTransaction(Transaction transaction) {
-		if(transaction.getTransactionStatus() == EnumtransactionStatus.confirmed){
-		}
-		else
-		{
-			transaction.setTransactionStatus(EnumtransactionStatus.canceled);
-		}
-	}
-	public void confirmTransaction(Transaction transaction) {
-		if(transaction.getTransactionStatus() == EnumtransactionStatus.canceled){
-		}
-		else
-		{
-			transaction.setTransactionStatus(EnumtransactionStatus.confirmed);
-		}
-	}
-	public List<Transaction> getTransfersToTheAccount(Account account) {
-		List<Transaction> tmp = new ArrayList<Transaction>();
-		for(Transaction t : transactions){
-			if(t.getReceiverAccount().equals(account)){
-				tmp.add(t);
+		if (waitingTransactions.contains(transaction)) {
+			transaction.setTransactionStatus(EnumTransactionStatus.Canceled);
+			if (transaction instanceof Itransfer) {
+				((Itransfer) transaction).getSenderAccount().setBalance(
+						((Itransfer) transaction).getSenderAccount()
+								.getBalance() + transaction.getAmount());
 			}
+			canceledTransactions.add(transaction);
+			waitingTransactions.remove(transaction);
 		}
-		return tmp;
+	}
+
+	public void confirmTransaction(Transaction transaction) {
+		if (waitingTransactions.contains(transaction)) {
+			transaction.setTransactionStatus(EnumTransactionStatus.Confirmed);
+			if (transaction instanceof Itransfer) {
+				transaction.getReceiverAccount().setBalance(
+						transaction.getReceiverAccount().getBalance()
+								+ transaction.getAmount());
+			}
+			confirmedTransactions.add(transaction);
+			waitingTransactions.remove(transaction);
+		}
+	}
+
+	public boolean createDeposit(Deposit deposit) {
+		return waitingTransactions.add(deposit);
+	}
+
+	public boolean createForeignTransfer(ForeignTransfer foreignTransfer) {
+		if (!foreignTransfer.getReceiverAccount().getSwift()
+				.equals(foreignTransfer.getSenderAccount().getSwift())) {
+			foreignTransfer.getSenderAccount().setBalance(
+					foreignTransfer.getSenderAccount().getBalance()
+							- foreignTransfer.getAmount());
+			return waitingTransactions.add(foreignTransfer);
+		}
+		return false;
+	}
+
+	public boolean createDomesticTransfe(DomesticTransfer domesticTransfer) {
+		if (domesticTransfer.getReceiverAccount().getSwift()
+				.equals(domesticTransfer.getSenderAccount().getSwift())) {
+			domesticTransfer.getSenderAccount().setBalance(
+					domesticTransfer.getSenderAccount().getBalance()
+							- domesticTransfer.getAmount());
+			return waitingTransactions.add(domesticTransfer);
+		}
+		return false;
+	}
+
+	public List<Transaction> getConfirmedTransactionList() {
+		return confirmedTransactions;
 	}
 
 }
