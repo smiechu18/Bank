@@ -16,7 +16,7 @@ import pl.lodz.uni.math.banking.dao.UserDao;
 public class BinProvider {
 	
 	private Scanner scanner;
-	private Map<String, Constructor<?>> beans;
+	private Map<String, Class<?>> beans;
 	
 	public BinProvider(){
 		 try {
@@ -29,10 +29,10 @@ public class BinProvider {
 		}
 	}
 
-	private Object createNewInstance(String className) {
+	private <T> T newInstance(Class<T> clazz) {
 		try {
-			return beans.get(className).newInstance();
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			return clazz.getConstructor().newInstance();
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException | NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -44,11 +44,13 @@ public class BinProvider {
 			String className = scanner.next();
 			String classQualifiedName = scanner.next();
 			Class<?> clazz = null;
-			Constructor<?> constructor = null;
 			try {
 				clazz = Class.forName(classQualifiedName);
-				constructor = clazz.getConstructor();
-				beans.put(className, constructor);
+				//check if a class has suitable contructor
+				clazz.getConstructor();
+				
+				//add class to known class set
+				beans.put(className, clazz);
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (NoSuchMethodException | SecurityException e) {
@@ -57,23 +59,19 @@ public class BinProvider {
 		}
 	}
 	
-	public Object getBeanByName(String className) {
-		return createNewInstance(className);
-	}
-
 	public UserDao getUserDao() {
-		return (UserDao) createNewInstance("UserDao");
+		return (UserDao) newInstance(beans.get("UserDao"));
 	}
 	
 	public TransactionDao getTransactionDao() {
-		return (TransactionDao) createNewInstance("TransactionDao");
+		return (TransactionDao) newInstance(beans.get("TransactionDao"));
 	}
 
 	public UserController getUserController() {
-		return (UserController) createNewInstance("UserController");
+		return (UserController) newInstance(beans.get("UserController"));
 	}
 
 	public TransactionController getTransactionController() {
-		return (TransactionController) createNewInstance("TransactionController");
+		return (TransactionController) newInstance(beans.get("TransactionController"));
 	}
 }
