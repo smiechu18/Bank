@@ -12,11 +12,15 @@ public interface TransactionController {
 	boolean createForeignTransfer(ForeignTransfer foreignTransfer);
 
 	boolean createDomesticTransfer(DomesticTransfer domesticTransfer);
+	
+	Transaction getWaitingTransactionByNumber(int transactionNumber);
 
 	void confirmTransaction(Transaction transaction);
 	
 	void cancelTransaction(Transaction transaction);
 	
 	List<Transaction> getConfirmedTransactionList();
+	
+	List<Transaction> getCanceledTransactionList();
 
 }

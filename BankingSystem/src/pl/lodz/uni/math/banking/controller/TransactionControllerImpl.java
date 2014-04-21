@@ -40,4 +40,10 @@ public class TransactionControllerImpl implements TransactionController {
 	public List<Transaction> getConfirmedTransactionList() {
 		return transactionDao.getConfirmedTransactionList();
 	}
+	public Transaction getWaitingTransactionByNumber(int transactionNumber) {
+		return transactionDao.getWaitingTransactionByNumber(transactionNumber);
+	}
+	public List<Transaction> getCanceledTransactionList() {
+		return transactionDao.getCanceledTransactionList();
+	}
 }

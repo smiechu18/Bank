@@ -7,8 +7,7 @@ public class ForeignTransfer extends Transaction implements Itransfer{
 		this.setReceiverAccount(receiverAccount);
 		this.setSenderAccount(senderAccount);
 		this.title = title;
-		this.transactionNumber = FOREIGN_TRANSFER_NUMBER_BASE
-				+ transactionCounter;
+		this.setTransactionNumber(Integer.parseInt(FOREIGN_TRANSFER_NUMBER_BASE) + transactionCounter);
 		this.setAmount(amount);
 		transactionCounter++;
 	}

@@ -30,15 +30,13 @@ public class UserControllerImpl implements UserController {
 	}
 
 	public void deleteAccount(User user,Account account) {
-		if(!userDao.deleteAccount(user,account)){
-			System.out.println("Account not found");
-		}
+		userDao.deleteAccount(user,account);
+		
 	}
 	
 	public void createAccount(User user, Account account) {
-		if(!userDao.createAccount(user, account)){
-			System.out.println("User not found");
-		}
+		userDao.createAccount(user, account);
+		
 	}
 
 	public User getUserById(String id) {

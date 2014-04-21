@@ -21,5 +21,9 @@ public interface TransactionDao {
 
 	List<Transaction> getConfirmedTransactionList();
 
+	Transaction getWaitingTransactionByNumber(int transactionNumber);
+
+	List<Transaction> getCanceledTransactionList();
+
 
 }

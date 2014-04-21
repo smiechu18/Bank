@@ -4,7 +4,7 @@ public class Deposit extends Transaction {
 		this.setTransactionStatus(EnumTransactionStatus.Accepted);
 		this.setReceiverAccount(receiverAccount);
 		this.title = title;
-		this.transactionNumber = DEPOSIT_NUMBER_BASE + transactionCounter;
+		this.setTransactionNumber(Integer.parseInt(DEPOSIT_NUMBER_BASE) + transactionCounter);
 		this.setAmount(amount);
 		transactionCounter++;
 	}

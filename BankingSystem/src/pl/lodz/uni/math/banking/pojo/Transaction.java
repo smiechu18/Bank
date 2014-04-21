@@ -5,7 +5,7 @@ public class Transaction {
 	private EnumTransactionStatus transactionStatus;
 	private Account receiverAccount;
 	protected String title;
-	protected String transactionNumber;
+	private int transactionNumber;
 	private double amount;
 	protected double balanceAfterTransaction;
 	protected String transactionDate;
@@ -31,6 +31,12 @@ public class Transaction {
 	}
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+	public int getTransactionNumber() {
+		return transactionNumber;
+	}
+	public void setTransactionNumber(int transactionNumber) {
+		this.transactionNumber = transactionNumber;
 	}
 	
 }

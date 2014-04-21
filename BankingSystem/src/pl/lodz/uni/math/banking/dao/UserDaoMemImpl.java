@@ -33,15 +33,39 @@ public class UserDaoMemImpl implements UserDao {
 	}
 
 	public boolean deleteUser(User user) {
-		return users.remove(user);
+		if(user == null){
+			System.out.println("User not found");
+			return false;
+		}
+		else  {
+			return users.remove(user);
+		}
+		
 	}
 
 	public boolean createAccount(User user, Account account) {
-		return user.getAccountsList().add(account);
+		if(user == null){
+			System.out.println("User not found");
+			return false;
+		}
+		else if(account == null){
+			System.out.println("Account not found");
+			return false;
+		}
+		else  {
+			return user.getAccountsList().add(account);
+		}
+		
 	}
 
 	public boolean deleteAccount(User user, Account account) {
-		return user.getAccountsList().remove(account);
+		if(user == null){
+			System.out.println("User not found");
+			return false;
+		}
+		else{
+			return user.getAccountsList().remove(account);
+		} 
 	}
 
 	public User getUserById(String id) {

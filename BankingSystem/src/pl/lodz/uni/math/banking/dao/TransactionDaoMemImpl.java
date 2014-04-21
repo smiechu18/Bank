@@ -12,6 +12,8 @@ public class TransactionDaoMemImpl implements TransactionDao {
 
 	public TransactionDaoMemImpl() {
 		waitingTransactions = new ArrayList<Transaction>();
+		setCanceledTransactionList(new ArrayList<Transaction>());
+		confirmedTransactions = new ArrayList<Transaction>();
 	}
 
 	public void cancelTransaction(Transaction transaction) {
@@ -22,7 +24,7 @@ public class TransactionDaoMemImpl implements TransactionDao {
 						((Itransfer) transaction).getSenderAccount()
 								.getBalance() + transaction.getAmount());
 			}
-			canceledTransactions.add(transaction);
+			getCanceledTransactionList().add(transaction);
 			waitingTransactions.remove(transaction);
 		}
 	}
@@ -41,6 +43,9 @@ public class TransactionDaoMemImpl implements TransactionDao {
 	}
 
 	public boolean createDeposit(Deposit deposit) {
+		if(deposit.getReceiverAccount()==null){
+			return false;
+		}
 		return waitingTransactions.add(deposit);
 	}
 
@@ -56,18 +61,35 @@ public class TransactionDaoMemImpl implements TransactionDao {
 	}
 
 	public boolean createDomesticTransfe(DomesticTransfer domesticTransfer) {
-		if (domesticTransfer.getReceiverAccount().getSwift()
-				.equals(domesticTransfer.getSenderAccount().getSwift())) {
-			domesticTransfer.getSenderAccount().setBalance(
-					domesticTransfer.getSenderAccount().getBalance()
-							- domesticTransfer.getAmount());
-			return waitingTransactions.add(domesticTransfer);
+		if(domesticTransfer.getSenderAccount().getSwift() == domesticTransfer.getReceiverAccount().getSwift()){
+			return false;
 		}
-		return false;
+		else if(domesticTransfer.getSenderAccount().equals(domesticTransfer.getReceiverAccount())){
+			return false;
+		}
+		return waitingTransactions.add(domesticTransfer);
 	}
 
 	public List<Transaction> getConfirmedTransactionList() {
 		return confirmedTransactions;
+	}
+
+	public Transaction getWaitingTransactionByNumber(int transactionNumber) {
+		Transaction tmp = null;
+		for(Transaction t: waitingTransactions){
+			if(t.getTransactionNumber() == transactionNumber){
+				tmp = t;
+			}
+		}
+		return tmp;
+	}
+
+	public ArrayList<Transaction> getCanceledTransactionList() {
+		return canceledTransactions;
+	}
+
+	public void setCanceledTransactionList(ArrayList<Transaction> canceledTransactions) {
+		this.canceledTransactions = canceledTransactions;
 	}
 
 }

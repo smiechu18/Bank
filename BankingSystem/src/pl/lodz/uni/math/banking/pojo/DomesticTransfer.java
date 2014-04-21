@@ -7,7 +7,7 @@ public class DomesticTransfer extends Transaction implements Itransfer{
 		this.setReceiverAccount(receiverAccount);
 		this.setSenderAccount(senderAccount);
 		this.title = title;
-		this.transactionNumber = DOMESTIC_TRANSFER_NUMBER_BASE + transactionCounter;
+		this.setTransactionNumber(Integer.parseInt(DOMESTIC_TRANSFER_NUMBER_BASE) + transactionCounter);
 		this.setAmount(amount);
 		transactionCounter++;
 	}
