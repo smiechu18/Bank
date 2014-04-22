@@ -64,6 +64,7 @@ public class UserDaoMemImpl implements UserDao {
 			return false;
 		}
 		else{
+			user.getClosedAccountsList().add(account);
 			return user.getAccountsList().remove(account);
 		} 
 	}
@@ -88,5 +89,7 @@ public class UserDaoMemImpl implements UserDao {
 			}
 		}
 		return tmp;
-	}	
+	}
+
+	
 }

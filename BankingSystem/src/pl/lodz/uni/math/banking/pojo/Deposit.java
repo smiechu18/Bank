@@ -1,4 +1,7 @@
 package pl.lodz.uni.math.banking.pojo;
+
+import java.util.GregorianCalendar;
+
 public class Deposit extends Transaction {
 	public Deposit(Account receiverAccount, String title, double amount) {
 		this.setTransactionStatus(EnumTransactionStatus.Accepted);
@@ -6,6 +9,7 @@ public class Deposit extends Transaction {
 		this.title = title;
 		this.setTransactionNumber(Integer.parseInt(DEPOSIT_NUMBER_BASE) + transactionCounter);
 		this.setAmount(amount);
+		this.setTransactionDate(new GregorianCalendar());
 		transactionCounter++;
 	}
 

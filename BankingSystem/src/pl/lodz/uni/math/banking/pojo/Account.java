@@ -1,30 +1,32 @@
 package pl.lodz.uni.math.banking.pojo;
 
+import java.util.GregorianCalendar;
+
 public class Account {
-	private String creatingDate; // GregorianCalendar
+	private GregorianCalendar creatingDate;
 	private String number;
-	private String closingDate; // GregorianCalendar
+	private GregorianCalendar closingDate;
 	private String country;
 	private double balance;
 	private String swift;
 	private static int accountNumberCounter = 1000;
-	public Account(String creatingDate, String closingDate, String country,
-			double balance) {
+
+	public Account(String country, double balance) {
 		this.setBalance(balance);
-		this.closingDate = closingDate;
+		this.closingDate = new GregorianCalendar();
 		this.country = country;
-		this.creatingDate = creatingDate;
-		this.setNumber("00 5700 0000 "+ accountNumberCounter);
+		this.creatingDate = new GregorianCalendar();
+		this.setNumber("00 5700 0000 " + accountNumberCounter);
 		accountNumberCounter++;
 		this.setSwift("ACCBTPLX");
 	}
-	public Account(String creatingDate, String closingDate, String country,
-			double balance,String swift) {
+
+	public Account(String country, double balance, String swift) {
 		this.setBalance(balance);
-		this.closingDate = closingDate;
+		this.closingDate = new GregorianCalendar();
 		this.country = country;
-		this.creatingDate = creatingDate;
-		this.setNumber("00 5700 0000 "+ accountNumberCounter);
+		this.creatingDate = new GregorianCalendar();
+		this.setNumber("00 5700 0000 " + accountNumberCounter);
 		accountNumberCounter++;
 		this.setSwift(swift);
 	}

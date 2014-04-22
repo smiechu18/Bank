@@ -1,13 +1,16 @@
 package pl.lodz.uni.math.banking.controller;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import pl.lodz.uni.math.banking.dao.TransactionDao;
 import pl.lodz.uni.math.banking.engine.BinProvider;
+import pl.lodz.uni.math.banking.pojo.Account;
 import pl.lodz.uni.math.banking.pojo.Deposit;
 import pl.lodz.uni.math.banking.pojo.DomesticTransfer;
 import pl.lodz.uni.math.banking.pojo.ForeignTransfer;
 import pl.lodz.uni.math.banking.pojo.Transaction;
+import pl.lodz.uni.math.banking.pojo.User;
 
 public class TransactionControllerImpl implements TransactionController {
 	private TransactionDao transactionDao;
@@ -45,5 +48,15 @@ public class TransactionControllerImpl implements TransactionController {
 	}
 	public List<Transaction> getCanceledTransactionList() {
 		return transactionDao.getCanceledTransactionList();
+	}
+	public void showHistory(User user) {
+		transactionDao.showHistory(user);
+	}
+	public void showAccountHistory(Account accountByNumber) {
+		transactionDao.showAccountHistory(accountByNumber);
+		
+	}
+	public void showAccountHistory(Account accountByNumber, GregorianCalendar t) {
+		transactionDao.showAccountHistory(accountByNumber,t);
 	}
 }

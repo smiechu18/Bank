@@ -10,12 +10,14 @@ public class User {
 	private String ssn; 
 	private String idNumber;
 	private List<Account> accountsList;
+	private List<Account> closedAccountsList;
 
 	public User(String name, String idNumber, String ssn) {
 		this.setName(name);
 		this.setIdNumber(idNumber);
 		this.setSsn(ssn);
 		setAccountsList(new ArrayList<Account>());
+		setClosedAccountsList(new ArrayList<Account>());
 	}
 
 	public String getName() {
@@ -54,7 +56,7 @@ public class User {
 		return accountsList;
 	}
 
-	public void setAccountsList(List<Account> accountsList) {
+	private void setAccountsList(List<Account> accountsList) {
 		this.accountsList = accountsList;
 	}
 
@@ -62,8 +64,16 @@ public class User {
 		return ssn;
 	}
 
-	public void setSsn(String ssn) {
+	private void setSsn(String ssn) {
 		this.ssn = ssn;
+	}
+
+	public List<Account> getClosedAccountsList() {
+		return closedAccountsList;
+	}
+
+	private void setClosedAccountsList(List<Account> closedAccountsList) {
+		this.closedAccountsList = closedAccountsList;
 	}
 
 }
