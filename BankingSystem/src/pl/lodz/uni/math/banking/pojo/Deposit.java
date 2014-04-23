@@ -7,12 +7,11 @@ public class Deposit extends Transaction {
 		this.setTransactionStatus(EnumTransactionStatus.Accepted);
 		this.setReceiverAccount(receiverAccount);
 		this.title = title;
-		this.setTransactionNumber(Integer.parseInt(DEPOSIT_NUMBER_BASE) + transactionCounter);
+		this.setTransactionNumber(DEPOSIT_NUMBER_BASE + transactionCounter);
 		this.setAmount(amount);
 		this.setTransactionDate(new GregorianCalendar());
-		transactionCounter++;
 	}
 
-	private final String DEPOSIT_NUMBER_BASE = "10001";
+	private final int DEPOSIT_NUMBER_BASE = 10000;
 }
 

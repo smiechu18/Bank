@@ -9,10 +9,9 @@ public class ForeignTransfer extends Transaction implements Itransfer{
 		this.setReceiverAccount(receiverAccount);
 		this.setSenderAccount(senderAccount);
 		this.title = title;
-		this.setTransactionNumber(Integer.parseInt(FOREIGN_TRANSFER_NUMBER_BASE) + transactionCounter);
+		this.setTransactionNumber(FOREIGN_TRANSFER_NUMBER_BASE + transactionCounter);
 		this.setAmount(amount);
 		this.setTransactionDate(new GregorianCalendar());
-		transactionCounter++;
 	}
 	public Account getSenderAccount() {
 		return senderAccount;
@@ -29,5 +28,5 @@ public class ForeignTransfer extends Transaction implements Itransfer{
 	}
 	private double balanceAfterTransactionSender;
 	private Account senderAccount;
-	private final String FOREIGN_TRANSFER_NUMBER_BASE = "1";
+	private final int FOREIGN_TRANSFER_NUMBER_BASE = 0;
 }

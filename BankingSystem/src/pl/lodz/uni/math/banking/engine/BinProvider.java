@@ -45,7 +45,7 @@ public class BinProvider {
 			Class<?> clazz = null;
 			try {
 				clazz = Class.forName(classQualifiedName);
-				//check if a class has suitable contructor
+				//check if a class has suitable constructor
 				clazz.getConstructor();
 				
 				//add class to known class set

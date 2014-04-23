@@ -1,20 +1,25 @@
 package pl.lodz.uni.math.banking.pojo;
 
+import java.math.BigDecimal;
 import java.util.GregorianCalendar;
 
-public class Transaction {
+public abstract class Transaction {
 	
 	private EnumTransactionStatus transactionStatus;
 	private Account receiverAccount;
 	protected String title;
 	private int transactionNumber;
-	private double amount;
-	private double balanceAfterTransactionReceiver;
+	private BigDecimal amount;
+	private BigDecimal balanceAfterTransactionReceiver;
 	private GregorianCalendar transactionDate;
 	protected String receiverName;
 	protected String receiverSurname;
 	protected String receiverAddress;
 	protected static int transactionCounter = 0;
+	
+	{
+		transactionCounter++;
+	}
 	
 	public EnumTransactionStatus getTransactionStatus() {
 		return transactionStatus;
@@ -28,11 +33,11 @@ public class Transaction {
 	public void setReceiverAccount(Account receiverAccount) {
 		this.receiverAccount = receiverAccount;
 	}
-	public double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 	public void setAmount(double amount) {
-		this.amount = amount;
+		this.amount = new BigDecimal(amount);
 	}
 	public int getTransactionNumber() {
 		return transactionNumber;
@@ -40,11 +45,11 @@ public class Transaction {
 	public void setTransactionNumber(int transactionNumber) {
 		this.transactionNumber = transactionNumber;
 	}
-	public double getBalanceAfterTransactionReceiver() {
+	public BigDecimal getBalanceAfterTransactionReceiver() {
 		return balanceAfterTransactionReceiver;
 	}
 	public void setBalanceAfterTransactionReceiver(double balanceAfterTransactionReceiver) {
-		this.balanceAfterTransactionReceiver = balanceAfterTransactionReceiver;
+		this.balanceAfterTransactionReceiver = new BigDecimal(balanceAfterTransactionReceiver);
 	}
 	public GregorianCalendar getTransactionDate() {
 		return transactionDate;

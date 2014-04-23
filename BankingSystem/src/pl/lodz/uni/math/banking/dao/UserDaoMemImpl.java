@@ -18,7 +18,8 @@ public class UserDaoMemImpl implements UserDao {
 		for (User u : users) {
 			if (u.getSsn().equals(user.getSsn())  	||	 u.getIdNumber().equals(user.getIdNumber())) {
 				tmp = true;
-			} else {
+			} 
+			else {
 				tmp = false;
 			}
 		}
@@ -34,33 +35,30 @@ public class UserDaoMemImpl implements UserDao {
 
 	public boolean deleteUser(User user) {
 		if(user == null){
-			System.out.println("User not found");
 			return false;
 		}
 		else  {
 			return users.remove(user);
 		}
-		
 	}
-
+	
 	public boolean createAccount(User user, Account account) {
 		if(user == null){
-			System.out.println("User not found");
 			return false;
 		}
 		else if(account == null){
-			System.out.println("Account not found");
+			return false;
+		}
+		else if(account.getSwift().length() != 8){
 			return false;
 		}
 		else  {
 			return user.getAccountsList().add(account);
 		}
-		
 	}
-
+	
 	public boolean deleteAccount(User user, Account account) {
 		if(user == null){
-			System.out.println("User not found");
 			return false;
 		}
 		else{

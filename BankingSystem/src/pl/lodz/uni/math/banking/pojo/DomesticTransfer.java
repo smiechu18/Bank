@@ -9,10 +9,9 @@ public class DomesticTransfer extends Transaction implements Itransfer{
 		this.setReceiverAccount(receiverAccount);
 		this.setSenderAccount(senderAccount);
 		this.title = title;
-		this.setTransactionNumber(Integer.parseInt(DOMESTIC_TRANSFER_NUMBER_BASE) + transactionCounter);
+		this.setTransactionNumber(DOMESTIC_TRANSFER_NUMBER_BASE + transactionCounter);
 		this.setAmount(amount);
 		this.setTransactionDate(new GregorianCalendar());
-		transactionCounter++;
 	}
 
 	public Account getSenderAccount() {
@@ -31,7 +30,7 @@ public class DomesticTransfer extends Transaction implements Itransfer{
 		this.balanceAfterTransactionSender = balanceAfterTransactionSender;
 	}
 
-	private final String DOMESTIC_TRANSFER_NUMBER_BASE = "10001";
+	private final int DOMESTIC_TRANSFER_NUMBER_BASE = 10000;
 	private Account senderAccount;
 	private double balanceAfterTransactionSender;
 }

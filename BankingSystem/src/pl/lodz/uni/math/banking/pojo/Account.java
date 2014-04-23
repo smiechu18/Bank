@@ -1,5 +1,6 @@
 package pl.lodz.uni.math.banking.pojo;
 
+import java.math.BigDecimal;
 import java.util.GregorianCalendar;
 
 public class Account {
@@ -7,7 +8,7 @@ public class Account {
 	private String number;
 	private GregorianCalendar closingDate;
 	private String country;
-	private double balance;
+	private BigDecimal balance;
 	private String swift;
 	private static int accountNumberCounter = 1000;
 
@@ -47,12 +48,15 @@ public class Account {
 		this.swift = swift;
 	}
 
-	public double getBalance() {
+	public BigDecimal getBalance() {
 		return balance;
 	}
 
-	public void setBalance(double balance) {
+	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
+	}
+	public void setBalance(double balance) {
+		this.balance = new BigDecimal(balance);
 	}
 
 }
