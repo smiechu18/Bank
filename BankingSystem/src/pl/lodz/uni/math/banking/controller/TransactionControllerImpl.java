@@ -37,7 +37,6 @@ public class TransactionControllerImpl implements TransactionController {
 
 	public void cancelTransaction(Transaction transaction) {
 		 transactionDao.cancelTransaction(transaction);
-		
 	}
 	
 	public List<Transaction> getConfirmedTransactionList() {

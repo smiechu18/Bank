@@ -8,7 +8,9 @@ import pl.lodz.uni.math.banking.engine.BinProvider;
 import pl.lodz.uni.math.banking.pojo.*;
 
 public class Main {
-	public static void main(String[] args) {
+
+	public static void main(String... args) {
+		
 		BinProvider binProvider = new BinProvider();
 		UserController uc = binProvider.getUserController();
 		TransactionController tc = binProvider.getTransactionController();
